@@ -1,4 +1,4 @@
-###Router 1###
+### Enter this following commands in Router 0 ###
 
 en
 conf t
@@ -34,7 +34,7 @@ copy ru st
 
 
 
-###router 2###
+### Enter this following commands in Router 1 ###
 
 en
 conf t
@@ -60,7 +60,7 @@ copy ru st
 
 
 
-###router 3###
+### Enter this following commands in Router 2 ###
 
 en
 conf t
