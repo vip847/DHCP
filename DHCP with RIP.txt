@@ -1,0 +1,80 @@
+###Router 1###
+
+en
+conf t
+int s0/1
+ip add 10.0.0.1 255.0.0.0
+cl ra 64000
+no shut
+int f0/0
+ip add 192.168.1.1 255.255.255.0
+no shut
+exit
+router rip
+net 192.168.1.0
+net 10.0.0.0
+exit
+ip dhcp pool r1
+net 192.168.1.0 255.255.255.0
+de 192.168.1.1
+dn 8.8.8.8
+exit
+ip dhcp pool r2
+net 192.168.2.0 255.255.255.0
+de 192.168.2.1
+dn 8.8.8.8
+exit
+ip dhcp pool r3
+net 192.168.3.0 255.255.255.0
+de 192.168.3.1
+dn 8.8.8.8
+exit
+exit
+copy ru st
+
+
+
+###router 2###
+
+en
+conf t
+int s0/0
+ip add 10.0.0.2 255.0.0.0
+no shut
+int f0/0
+ip add 192.168.2.1 255.255.255.0
+ip help 10.0.0.1
+no shut
+int s0/1
+ip add 11.0.0.1 255.0.0.0
+cl ra 64000
+no shut
+exit
+router rip
+net 10.0.0.0
+net 11.0.0.0
+net 192.168.2.0
+exit
+exit
+copy ru st
+
+
+
+###router 3###
+
+en
+conf t
+int s0/0
+ip add 11.0.0.2 255.0.0.0
+no shut
+int f0/0
+ip add 192.168.3.1 255.255.255.0
+no shut
+ip help 10.0.0.1
+exit
+router rip
+net 11.0.0.0
+net 192.168.3.0
+exit
+exit
+copy ru st
